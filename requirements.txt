@@ -1,0 +1,7 @@
+flask
+python-dotenv
+pandas
+gtts
+pydub
+twilio
+apscheduler
