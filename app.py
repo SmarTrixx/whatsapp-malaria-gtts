@@ -11,7 +11,7 @@ from twilio.rest import Client
 # Load env vars
 load_dotenv()
 
-TESTING_MODE = True
+TESTING_MODE = False
 os.makedirs("temp_audio", exist_ok=True)
 AudioSegment.converter = "/usr/bin/ffmpeg"
 
