@@ -7,7 +7,6 @@ from gtts import gTTS
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
 from twilio.rest import Client
-import time
 
 # Load env vars
 load_dotenv()
@@ -69,13 +68,20 @@ def broadcast():
         ha = translate_to_hausa(en)
         audio = tts_generate(ha)
         print(f"🌐 PUBLIC_URL: {os.getenv('PUBLIC_URL')}")
-        audio_url = f"{os.getenv('PUBLIC_URL')}/temp_audio/{audio}"
+
+        # Get PUBLIC_URL and ensure it starts with https://
+        public_url = os.getenv("PUBLIC_URL", "")
+        if not public_url.startswith("http"):
+            public_url = "https://" + public_url
+
+        # Build full audio URL
+        audio_url = f"{public_url}/temp_audio/{audio}"
+        # audio_url = f"{os.getenv('PUBLIC_URL')}/temp_audio/{audio}"
 
         print(f"📨 EN: {en}\n🌍 HA: {ha}")
         print(f"🔊 Audio: {audio_url}")
 
         for to in RECIPIENTS:
-            time.sleep(2)
             # Send Hausa text
             client.messages.create(body=ha, from_=FROM, to=to)
 
