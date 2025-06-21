@@ -7,6 +7,7 @@ from gtts import gTTS
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
 from twilio.rest import Client
+import time
 
 # Load env vars
 load_dotenv()
@@ -74,6 +75,7 @@ def broadcast():
         print(f"🔊 Audio: {audio_url}")
 
         for to in RECIPIENTS:
+            time.sleep(2)
             # Send Hausa text
             client.messages.create(body=ha, from_=FROM, to=to)
 
@@ -81,11 +83,14 @@ def broadcast():
             client.messages.create(media_url=[audio_url], from_=FROM, to=to)
 
     except Exception as e:
-        print(f"❌ Broadcast error: {e}")
+        import traceback
+        print("❌ Broadcast error:", e)
+        traceback.print_exc()
+
 
 # Schedule for 
 sched = BackgroundScheduler()
-sched.add_job(broadcast, "cron", hour=17, minute=20)  # Daily at 9:00 AM
+sched.add_job(broadcast, "cron", hour=8, minute=0)  # Daily at 9:00 AM
 # sched.add_job(broadcast, "interval", minutes=2) # For testing, every 2 minutes
 sched.start()
 
