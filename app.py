@@ -84,7 +84,7 @@ def broadcast():
 
 # Schedule for 
 sched = BackgroundScheduler()
-sched.add_job(broadcast, "cron", hour=9, minute=0)  # Daily at 9:00 AM
+sched.add_job(broadcast, "cron", hour=16, minute=15)  # Daily at 9:00 AM
 # sched.add_job(broadcast, "interval", minutes=2) # For testing, every 2 minutes
 sched.start()
 
