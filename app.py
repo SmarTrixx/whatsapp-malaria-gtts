@@ -42,11 +42,11 @@ def tts_generate(text):
     tts.save(mp3_path)
     return mp3_name
 
-# Auto-set PUBLIC_URL on first request
-@app.before_request
-def set_public_url():
-    if not os.getenv("PUBLIC_URL"):
-        os.environ["PUBLIC_URL"] = request.host_url.rstrip("/")
+# # Auto-set PUBLIC_URL on first request
+# @app.before_request
+# def set_public_url():
+#     if not os.getenv("PUBLIC_URL"):
+#         os.environ["PUBLIC_URL"] = request.host_url.rstrip("/")
 
 # Broadcast message
 def broadcast():
@@ -85,7 +85,7 @@ def broadcast():
 
 # Schedule for 
 sched = BackgroundScheduler()
-sched.add_job(broadcast, "cron", hour=16, minute=15)  # Daily at 9:00 AM
+sched.add_job(broadcast, "cron", hour=17, minute=20)  # Daily at 9:00 AM
 # sched.add_job(broadcast, "interval", minutes=2) # For testing, every 2 minutes
 sched.start()
 
