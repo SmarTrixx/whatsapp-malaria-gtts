@@ -96,6 +96,11 @@ def home():
 def serve_audio(file):
     return send_from_directory("temp_audio", file)
 
+@app.route("/list_audio")
+def list_audio():
+    return {"files": os.listdir("temp_audio")}
+
+
 @app.route("/twilio", methods=["POST"])
 def handle_incoming():
     msg = request.values.get("Body", "")
