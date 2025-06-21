@@ -67,6 +67,7 @@ def broadcast():
         en = df.loc[idx, "message"]
         ha = translate_to_hausa(en)
         audio = tts_generate(ha)
+        print(f"🌐 PUBLIC_URL: {os.getenv('PUBLIC_URL')}")
         audio_url = f"{os.getenv('PUBLIC_URL')}/temp_audio/{audio}"
 
         print(f"📨 EN: {en}\n🌍 HA: {ha}")
