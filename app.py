@@ -87,6 +87,7 @@ def broadcast():
 
             # Send Hausa audio
             client.messages.create(media_url=[audio_url], from_=FROM, to=to)
+        print("✅ Broadcast complete!")
 
     except Exception as e:
         import traceback
